@@ -20,6 +20,11 @@ const UserSchema = new mongoose.Schema({
     updatedAt : {
         type : Date,
         default : Date.now()
+    },
+    role : {
+        type : String,
+        enum : ['student', 'admin'],
+        default : "student"
     }
 })
 

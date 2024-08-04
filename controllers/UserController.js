@@ -58,36 +58,39 @@ const ReadAllUser = async (req, res) => {
 }
 
 const ReadUser = async (req, res) => {
-    const { clerkID } = req.body;
+    const clerkID = req.params.clerkID;
+    //console.log(clerkID);
     if (clerkID) {
-        try{
-            const UserData = UserModel.find({
-                clerkID : clerkID
-            })
+        try {
+            const userData = await UserModel.findOne({ clerkID: clerkID }).lean(); // using .lean() to get a plain JavaScript object
             
-            if(UserData){
+            if (userData) {
                 return res.json({
                     success: true,
-                    message: "new User created successfully"
-                })
-
+                    data: userData
+                });
+            } else {
+                return res.json({
+                    success: false,
+                    message: "User not found"
+                });
             }
-    
-        }
-        catch(error){
+
+        } catch (error) {
             console.error(error);
             return res.json({
-                success : false,
-                message : "Server error :("
-            })
+                success: false,
+                message: "Server error :("
+            });
         }
-    }   
-    else
+    } else {
         return res.json({
             success: false,
             message: "Insufficient Data"
-        })
+        });
+    }
 }
+
 
 const UpdateUser = async (req, res) => {
     const { clerkID, username, email, profilePicture } = req.body;
