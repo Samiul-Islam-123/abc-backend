@@ -10,7 +10,8 @@ const ProjectRouter = require('./routes/ProjectRoute');
 const UploadRouter = require('./routes/UploadRoute');
 const checkAuth = require('./middlewares/Auth');
 const app = express();
-const cors = require('cors')
+const cors = require('cors');
+const PostRouter = require('./routes/PostRouter');
 
 const PORT = process.env.PORT || 5500;
 
@@ -29,6 +30,7 @@ app.use('/announcement', AnnouncementRouter);
 app.use('/event', EventRouter)
 app.use('/project',  ProjectRouter)
 app.use('/util', UploadRouter);
+app.use("/post", PostRouter)
 
 app.get("/dummy-dashboard", (req,res) => {
     const dummyData = {
