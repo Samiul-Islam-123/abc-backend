@@ -46,7 +46,11 @@ const createPost = async (req, res) => {
 // Get all posts
 const readAllPosts = async (req, res) => {
     try {
-        const posts = await PostModel.find().populate('user', 'username profilePicture');
+        // Fetch all posts, populate the 'user' field with 'username' and 'profilePicture', and sort by 'createdAt' in descending order
+        const posts = await PostModel.find()
+            .populate('user', 'username profilePicture')
+            .sort({ updatedAt: -1 }); // Sort by createdAt in descending order
+
         res.status(200).json({
             success: true,
             message: "Posts fetched successfully",

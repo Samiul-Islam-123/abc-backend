@@ -13,9 +13,9 @@ const AnnouncementSchema = new Schema({
     required: true,
   },
   author: {
-    type: Schema.Types.ObjectId,
-    ref: 'users',
-    required: true,
+    type : String,
+    required : true,
+    enum: ['admin'] // Only allows "Admin" as a valid value
   },
   createdAt: {
     type: Date,

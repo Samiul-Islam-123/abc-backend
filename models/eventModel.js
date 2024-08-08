@@ -21,9 +21,9 @@ const EventSchema = new Schema({
     required: true,
   },
   organizer: {
-    type: Schema.Types.ObjectId,
-    ref: 'users',
-    required: true,
+    type: String,
+    required : true,
+    enum : ['admin']
   },
   participants: [
     {
